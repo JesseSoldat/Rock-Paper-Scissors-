@@ -20,6 +20,30 @@ class App extends Component {
 		this.play = this.play.bind(this);
 	}
 
+	componentDidMount(){
+		window.addEventListener('keyup', (e) => {
+			if(e.keyCode === 82) {
+				this.play('Rock');
+			} else if (e.keyCode === 80){
+				this.play('Paper');
+			} else if (e.keyCode === 83){
+				this.play('Scissors');
+			}
+		});
+	}
+
+	  componentWillUnmount() {
+    window.removeEventListener('keyup', (e) => {
+      if (e.keyCode === 82) {
+        this.play('Rock');
+      } else if (e.keyCode === 80) {
+        this.play('Paper');
+      } else if (e.keyCode === 83) {
+        this.play('Scissors');
+      }
+    });
+  }
+
 	randomPick() {
 		var options = ["Rock", "Paper", "Scissors"];
 		return options[Math.floor(Math.random()*3)];
@@ -27,11 +51,11 @@ class App extends Component {
 
 	play(option) {
 		var game = {};
-		console.log('Player:', option);
-		console.log('Computer: ', this.state.computer);
+		// console.log('Player:', option);
+		// console.log('Computer: ', this.state.computer);
 		if(this.state.computer === option){
 			game.result = 1;
-			console.log('Tie!');
+			// console.log('Tie!');
 		} else if ( 
 			(this.state.computer === "Rock" && option === "Paper")
 			||
@@ -40,10 +64,10 @@ class App extends Component {
 			(this.state.computer === "Scissors" && option === "Rock")
 			) {
 				game.result = 2;
-				console.log("Win!");
+				// console.log("Win!");
 			} else {
 				game.result = 0;
-				console.log("Loose!");
+				// console.log("Loose!");
 			}
 			game.computer = this.state.computer;
 			game.player = option;

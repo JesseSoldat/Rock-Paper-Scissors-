@@ -3,9 +3,9 @@ import React, {Component} from 'react';
 export default class extends Component {
 	render(){
 		var stats = this.props.scores.reduce( (stats, game) => {
-			console.log('---------------------');
-			console.log(stats);
-			console.log(game);
+			// console.log('---------------------');
+			// console.log(stats);
+			// console.log(game);
 			if(game.result === 2) {
 				stats.won++;
 			} else if (game.result === 1){
@@ -20,16 +20,16 @@ export default class extends Component {
 		var alertClass = '';
 
 		if(this.props.scores.length){
-			console.log('Stats', stats);
+			// console.log('Stats', stats);
 			var game = this.props.scores[this.props.scores.length - 1]; //current round
 			// console.log('game', game);
 			if (game.result === 1) {
 				message = "Tie! Play Again...";
 			} else if (game.result === 2){
-				message = "You Won!";
+				message = "You Won! "+game.player+" beats "+game.computer+"!";
 				alertClass = "won";
 			} else {
-				message = "You Lost!";
+				message = "You Lost! "+game.player+" loses to "+game.computer+"!";
 				alertClass = "lost"
 			}
 		}
